@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block body %}
+        <section class="userList">
+            <header>
+                <div class="content">
+                    <div class="details">
+                        {% for user in users %}
+                            {% if user.Name == session.user %}
+                                <span>{{user.Name}}</span>
+                                {% if user.Status == 0 %}
+                                    <p>Offline</p>
+                                {%else%}
+                                    <p>Active now</p> 
+                                {%endif%}   
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+     
+                <a href="/logout" class="logout">Logout</a>
+            </header>
+            
+            <div class="search">
+                <!--
+                <span class="text">Select a user to start chat</span>
+                <input type="text" placeholder="Enter Name...">
+                <button><i class="fa fa-search"></i></button>
+                -->
+            </div>
+            <div class="user-lists">
+            {% for user in users %}
+                {% if user.Name != session.user %}
+                        <a href="/chat/{{user.Name}}">
+                            <div class="content">
+                                <div class="details">
+                                    <span>{{user.Name}}</span>
+                                        <p>Test Mesaage</p>                       
+                                </div>
+                            </div>
+                            <div class="status-dot"><i class="fa fa-circle"></i></div>
+                        </a>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </section>
+{% endblock %}
